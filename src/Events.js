@@ -42,11 +42,11 @@ class Events {
 	}
 
 	/** Returns a promise that list all events on calendar during selected period
-	 * 
+	 *
 	 * @param {string} calendarId 					- Calendar identifier
 	 * @param {datetime} params.timeMin (optional) 	- start datetime of event in 2016-04-29T14:00:00+08:00 RFC3339 format
 	 * @param {datetime} params.timeMax (optional) 	- end datetime of event in 2016-04-29T18:00:00+08:00 RFC3339 format
-	 * @param {string} params.q (optional) 			- Free text search terms to find events that match these terms in any field, except for extended properties. 
+	 * @param {string} params.q (optional) 			- Free text search terms to find events that match these terms in any field, except for extended properties.
 	 */
 	get(calendarId, eventId, params) {
 		this._checkCalendarId(calendarId, 'GetEvent');
@@ -75,7 +75,7 @@ class Events {
 	insert(calendarId, params) {
 		this._checkCalendarId(calendarId, 'insertEvent');
 
-		return this._httpRequest.post(calendarId, `${this._gcalBaseUrl}${calendarId}/events`, params, this._JWT)
+		return this._httpRequest.post(calendarId, `${this._gcalBaseUrl}${calendarId}/events?sendNotifications=true`, params, this._JWT)
 			.then(resp => {
 				this._checkErrorResponse(200, resp.statusCode, resp.body);
 				return resp.body;
@@ -86,7 +86,7 @@ class Events {
 	}
 
 	/** Returns instances of the specified recurring event.
-	 *  	 
+	 *
 	 * @param {string} calendarId 					- Calendar identifier
 	 * @param {string} eventId 						- EventId specifying event to delete
 	 */
@@ -105,11 +105,11 @@ class Events {
 	}
 
 	/** Returns a promise that list all events on calendar during selected period
-	 * 
+	 *
 	 * @param {string} calendarId 					- Calendar identifier
 	 * @param {datetime} params.timeMin (optional) 	- start datetime of event in 2016-04-29T14:00:00+08:00 RFC3339 format
 	 * @param {datetime} params.timeMax (optional) 	- end datetime of event in 2016-04-29T18:00:00+08:00 RFC3339 format
-	 * @param {string} params.q (optional) 			- Free text search terms to find events that match these terms in any field, except for extended properties. 
+	 * @param {string} params.q (optional) 			- Free text search terms to find events that match these terms in any field, except for extended properties.
 	 */
 	list(calendarId, params) {
 		this._checkCalendarId(calendarId, 'listEvents');
@@ -148,7 +148,7 @@ class Events {
 	}
 
 	/** Creates an event based on a simple text string.
-	 * 
+	 *
 	 * @param {string} calendarId 					- Calendar identifier
 	 * @param {string} params.text 					- The text describing the event to be created.
 	 */
@@ -184,7 +184,7 @@ class Events {
 	}
 
 	/** Watch for changes to Events resources
-	 * 
+	 *
 	 * @param {string} calendarId		- Calendar identifier
 	 */
 	watch(calendarId, params) {
